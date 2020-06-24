@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../joya/joya.h
+iostream
+-
+
+/home/bassam/JOYA/joya/src/joya.cpp
+joya.h
+/home/bassam/JOYA/joya/src/joya.h
+

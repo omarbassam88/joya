@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/bassam/JOYA/build/joya",
+  "command": "/bin/g++-9   -I/home/bassam/JOYA/joya/.  -g   -o CMakeFiles/joya.dir/src/joya.cpp.o -c /home/bassam/JOYA/joya/src/joya.cpp",
+  "file": "/home/bassam/JOYA/joya/src/joya.cpp"
+},
+{
+  "directory": "/home/bassam/JOYA/build/test_app",
+  "command": "/bin/g++-9   -I/home/bassam/JOYA/joya  -g   -o CMakeFiles/TEST.dir/src/main.cpp.o -c /home/bassam/JOYA/test_app/src/main.cpp",
+  "file": "/home/bassam/JOYA/test_app/src/main.cpp"
+}
+]

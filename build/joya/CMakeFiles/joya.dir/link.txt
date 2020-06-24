@@ -1,0 +1,2 @@
+/bin/ar qc libjoya.a  CMakeFiles/joya.dir/src/joya.cpp.o
+/bin/ranlib libjoya.a
