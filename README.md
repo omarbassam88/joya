@@ -1,2 +1,2 @@
-# joya
+# JOYA
 JOYA GAME ENGINE
