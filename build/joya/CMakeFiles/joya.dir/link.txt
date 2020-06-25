@@ -1,2 +1,1 @@
-/bin/ar qc libjoya.a  CMakeFiles/joya.dir/src/joya.cpp.o
-/bin/ranlib libjoya.a
+/bin/g++-9 -fPIC -g  -shared -Wl,-soname,libjoya.so -o libjoya.so CMakeFiles/joya.dir/src/App.cpp.o 

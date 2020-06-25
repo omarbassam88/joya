@@ -56,6 +56,18 @@ CMAKE_BINARY_DIR = /home/bassam/JOYA/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -89,6 +101,28 @@ package_source/fast: package_source
 
 .PHONY : package_source/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -110,6 +144,18 @@ package: preinstall
 package/fast: package
 
 .PHONY : package/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -158,32 +204,32 @@ TEST/fast:
 	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/build
 .PHONY : TEST/fast
 
-src/main.o: src/main.cpp.o
+src/TestApp.o: src/TestApp.cpp.o
 
-.PHONY : src/main.o
+.PHONY : src/TestApp.o
 
 # target to build an object file
-src/main.cpp.o:
-	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/TestApp.cpp.o:
+	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.o
+.PHONY : src/TestApp.cpp.o
 
-src/main.i: src/main.cpp.i
+src/TestApp.i: src/TestApp.cpp.i
 
-.PHONY : src/main.i
+.PHONY : src/TestApp.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/TestApp.cpp.i:
+	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.i
+.PHONY : src/TestApp.cpp.i
 
-src/main.s: src/main.cpp.s
+src/TestApp.s: src/TestApp.cpp.s
 
-.PHONY : src/main.s
+.PHONY : src/TestApp.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/TestApp.cpp.s:
+	cd /home/bassam/JOYA/build && $(MAKE) -f test_app/CMakeFiles/TEST.dir/build.make test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.s
+.PHONY : src/TestApp.cpp.s
 
 # Help Target
 help:
@@ -191,15 +237,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... package_source"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... package"
+	@echo "... install/strip"
 	@echo "... TEST"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/TestApp.o"
+	@echo "... src/TestApp.i"
+	@echo "... src/TestApp.s"
 .PHONY : help
 
 

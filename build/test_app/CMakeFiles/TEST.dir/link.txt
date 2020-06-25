@@ -1,1 +1,1 @@
-/bin/g++-9  -g   CMakeFiles/TEST.dir/src/main.cpp.o  -o TEST  ../joya/libjoya.a 
+/bin/g++-9  -g   CMakeFiles/TEST.dir/src/TestApp.cpp.o  -o TEST  -Wl,-rpath,/home/bassam/JOYA/build/joya ../joya/libjoya.so 

@@ -53,12 +53,14 @@ CMAKE_BINARY_DIR = /home/bassam/JOYA/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: thirdparty/glfw/all
 all: joya/all
 all: test_app/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
+preinstall: thirdparty/glfw/preinstall
 preinstall: joya/preinstall
 preinstall: test_app/preinstall
 
@@ -93,6 +95,7 @@ clean: CMakeFiles/ContinuousTest.dir/clean
 clean: CMakeFiles/ContinuousSubmit.dir/clean
 clean: CMakeFiles/NightlyBuild.dir/clean
 clean: CMakeFiles/ExperimentalBuild.dir/clean
+clean: thirdparty/glfw/clean
 clean: joya/clean
 clean: test_app/clean
 
@@ -133,6 +136,43 @@ test_app/preinstall:
 test_app/clean: test_app/CMakeFiles/TEST.dir/clean
 
 .PHONY : test_app/clean
+
+#=============================================================================
+# Directory level rules for directory thirdparty/glfw
+
+# Recursive "all" directory target.
+thirdparty/glfw/all: thirdparty/glfw/src/all
+
+.PHONY : thirdparty/glfw/all
+
+# Recursive "preinstall" directory target.
+thirdparty/glfw/preinstall: thirdparty/glfw/src/preinstall
+
+.PHONY : thirdparty/glfw/preinstall
+
+# Recursive "clean" directory target.
+thirdparty/glfw/clean: thirdparty/glfw/CMakeFiles/uninstall.dir/clean
+thirdparty/glfw/clean: thirdparty/glfw/src/clean
+
+.PHONY : thirdparty/glfw/clean
+
+#=============================================================================
+# Directory level rules for directory thirdparty/glfw/src
+
+# Recursive "all" directory target.
+thirdparty/glfw/src/all: thirdparty/glfw/src/CMakeFiles/glfw.dir/all
+
+.PHONY : thirdparty/glfw/src/all
+
+# Recursive "preinstall" directory target.
+thirdparty/glfw/src/preinstall:
+
+.PHONY : thirdparty/glfw/src/preinstall
+
+# Recursive "clean" directory target.
+thirdparty/glfw/src/clean: thirdparty/glfw/src/CMakeFiles/glfw.dir/clean
+
+.PHONY : thirdparty/glfw/src/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/NightlyMemCheck.dir
@@ -891,13 +931,67 @@ CMakeFiles/ExperimentalBuild.dir/clean:
 .PHONY : CMakeFiles/ExperimentalBuild.dir/clean
 
 #=============================================================================
+# Target rules for target thirdparty/glfw/CMakeFiles/uninstall.dir
+
+# All Build rule for target.
+thirdparty/glfw/CMakeFiles/uninstall.dir/all:
+	$(MAKE) -f thirdparty/glfw/CMakeFiles/uninstall.dir/build.make thirdparty/glfw/CMakeFiles/uninstall.dir/depend
+	$(MAKE) -f thirdparty/glfw/CMakeFiles/uninstall.dir/build.make thirdparty/glfw/CMakeFiles/uninstall.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num= "Built target uninstall"
+.PHONY : thirdparty/glfw/CMakeFiles/uninstall.dir/all
+
+# Build rule for subdir invocation for target.
+thirdparty/glfw/CMakeFiles/uninstall.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bassam/JOYA/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 thirdparty/glfw/CMakeFiles/uninstall.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bassam/JOYA/build/CMakeFiles 0
+.PHONY : thirdparty/glfw/CMakeFiles/uninstall.dir/rule
+
+# Convenience name for target.
+uninstall: thirdparty/glfw/CMakeFiles/uninstall.dir/rule
+
+.PHONY : uninstall
+
+# clean rule for target.
+thirdparty/glfw/CMakeFiles/uninstall.dir/clean:
+	$(MAKE) -f thirdparty/glfw/CMakeFiles/uninstall.dir/build.make thirdparty/glfw/CMakeFiles/uninstall.dir/clean
+.PHONY : thirdparty/glfw/CMakeFiles/uninstall.dir/clean
+
+#=============================================================================
+# Target rules for target thirdparty/glfw/src/CMakeFiles/glfw.dir
+
+# All Build rule for target.
+thirdparty/glfw/src/CMakeFiles/glfw.dir/all:
+	$(MAKE) -f thirdparty/glfw/src/CMakeFiles/glfw.dir/build.make thirdparty/glfw/src/CMakeFiles/glfw.dir/depend
+	$(MAKE) -f thirdparty/glfw/src/CMakeFiles/glfw.dir/build.make thirdparty/glfw/src/CMakeFiles/glfw.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target glfw"
+.PHONY : thirdparty/glfw/src/CMakeFiles/glfw.dir/all
+
+# Build rule for subdir invocation for target.
+thirdparty/glfw/src/CMakeFiles/glfw.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bassam/JOYA/build/CMakeFiles 17
+	$(MAKE) -f CMakeFiles/Makefile2 thirdparty/glfw/src/CMakeFiles/glfw.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bassam/JOYA/build/CMakeFiles 0
+.PHONY : thirdparty/glfw/src/CMakeFiles/glfw.dir/rule
+
+# Convenience name for target.
+glfw: thirdparty/glfw/src/CMakeFiles/glfw.dir/rule
+
+.PHONY : glfw
+
+# clean rule for target.
+thirdparty/glfw/src/CMakeFiles/glfw.dir/clean:
+	$(MAKE) -f thirdparty/glfw/src/CMakeFiles/glfw.dir/build.make thirdparty/glfw/src/CMakeFiles/glfw.dir/clean
+.PHONY : thirdparty/glfw/src/CMakeFiles/glfw.dir/clean
+
+#=============================================================================
 # Target rules for target joya/CMakeFiles/joya.dir
 
 # All Build rule for target.
 joya/CMakeFiles/joya.dir/all:
 	$(MAKE) -f joya/CMakeFiles/joya.dir/build.make joya/CMakeFiles/joya.dir/depend
 	$(MAKE) -f joya/CMakeFiles/joya.dir/build.make joya/CMakeFiles/joya.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=3,4 "Built target joya"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=20,21 "Built target joya"
 .PHONY : joya/CMakeFiles/joya.dir/all
 
 # Build rule for subdir invocation for target.

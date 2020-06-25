@@ -7,10 +7,22 @@
 #IncludeRegexTransform: 
 
 ../joya/joya.h
+src/App.h
+../joya/src/App.h
+src/EntryPoint.h
+../joya/src/EntryPoint.h
+
+../joya/src/App.h
 iostream
 -
+Core.h
+../joya/src/Core.h
 
-/home/bassam/JOYA/test_app/src/main.cpp
+../joya/src/Core.h
+
+../joya/src/EntryPoint.h
+
+/home/bassam/JOYA/test_app/src/TestApp.cpp
 joya.h
 /home/bassam/JOYA/test_app/src/joya.h
 

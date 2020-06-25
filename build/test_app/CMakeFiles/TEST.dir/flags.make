@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/bassam/JOYA/joya 
+CXX_INCLUDES = -I/home/bassam/JOYA/joya/src -I/home/bassam/JOYA/joya 
 

@@ -1,4 +1,5 @@
-#include <iostream>
-// #include <string>
+#include "src/App.h"
 
-void print(std::string msg);
+
+// Entry Point
+#include "src/EntryPoint.h"

@@ -1,4 +1,4 @@
 
-include_directories(.)
+include_directories(src)
 
-add_library(joya  src/joya.cpp)
+add_library(joya SHARED src/App.cpp)

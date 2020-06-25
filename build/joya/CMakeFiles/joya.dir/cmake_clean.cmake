@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/joya.dir/src/joya.cpp.o"
-  "libjoya.a"
+  "CMakeFiles/joya.dir/src/App.cpp.o"
   "libjoya.pdb"
+  "libjoya.so"
 )
 
 # Per-language clean rules from dependency scanning.

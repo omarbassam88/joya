@@ -57,29 +57,29 @@ include test_app/CMakeFiles/TEST.dir/progress.make
 # Include the compile flags for this target's objects.
 include test_app/CMakeFiles/TEST.dir/flags.make
 
-test_app/CMakeFiles/TEST.dir/src/main.cpp.o: test_app/CMakeFiles/TEST.dir/flags.make
-test_app/CMakeFiles/TEST.dir/src/main.cpp.o: ../test_app/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test_app/CMakeFiles/TEST.dir/src/main.cpp.o"
-	cd /home/bassam/JOYA/build/test_app && /bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TEST.dir/src/main.cpp.o -c /home/bassam/JOYA/test_app/src/main.cpp
+test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.o: test_app/CMakeFiles/TEST.dir/flags.make
+test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.o: ../test_app/src/TestApp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.o"
+	cd /home/bassam/JOYA/build/test_app && /bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TEST.dir/src/TestApp.cpp.o -c /home/bassam/JOYA/test_app/src/TestApp.cpp
 
-test_app/CMakeFiles/TEST.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST.dir/src/main.cpp.i"
-	cd /home/bassam/JOYA/build/test_app && /bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bassam/JOYA/test_app/src/main.cpp > CMakeFiles/TEST.dir/src/main.cpp.i
+test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST.dir/src/TestApp.cpp.i"
+	cd /home/bassam/JOYA/build/test_app && /bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bassam/JOYA/test_app/src/TestApp.cpp > CMakeFiles/TEST.dir/src/TestApp.cpp.i
 
-test_app/CMakeFiles/TEST.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST.dir/src/main.cpp.s"
-	cd /home/bassam/JOYA/build/test_app && /bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bassam/JOYA/test_app/src/main.cpp -o CMakeFiles/TEST.dir/src/main.cpp.s
+test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST.dir/src/TestApp.cpp.s"
+	cd /home/bassam/JOYA/build/test_app && /bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bassam/JOYA/test_app/src/TestApp.cpp -o CMakeFiles/TEST.dir/src/TestApp.cpp.s
 
 # Object files for target TEST
 TEST_OBJECTS = \
-"CMakeFiles/TEST.dir/src/main.cpp.o"
+"CMakeFiles/TEST.dir/src/TestApp.cpp.o"
 
 # External object files for target TEST
 TEST_EXTERNAL_OBJECTS =
 
-test_app/TEST: test_app/CMakeFiles/TEST.dir/src/main.cpp.o
+test_app/TEST: test_app/CMakeFiles/TEST.dir/src/TestApp.cpp.o
 test_app/TEST: test_app/CMakeFiles/TEST.dir/build.make
-test_app/TEST: joya/libjoya.a
+test_app/TEST: joya/libjoya.so
 test_app/TEST: test_app/CMakeFiles/TEST.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bassam/JOYA/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable TEST"
 	cd /home/bassam/JOYA/build/test_app && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TEST.dir/link.txt --verbose=$(VERBOSE)
