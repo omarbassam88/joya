@@ -1,1 +1,0 @@
-/bin/g++-9 -fPIC -g  -shared -Wl,-soname,libjoya.so -o libjoya.so CMakeFiles/joya.dir/src/App.cpp.o 
