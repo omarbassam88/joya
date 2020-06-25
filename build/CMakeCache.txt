@@ -393,7 +393,7 @@ JOYA_BINARY_DIR:STATIC=/home/bassam/JOYA/build
 JOYA_SOURCE_DIR:STATIC=/home/bassam/JOYA
 
 //Command to build the project
-MAKECOMMAND:STRING=/usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
+MAKECOMMAND:STRING=/usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 
 //Path to a library.
 MATH_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
