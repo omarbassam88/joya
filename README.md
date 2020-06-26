@@ -10,7 +10,7 @@ You can follow the RoadMap for the Development Here:
 
 [JOYA GAME ENGINE RoadMap](https://trello.com/b/5CSjWtYD/joya-game-engine)
 
-Also, Planning to make a Blog or a Youtube Channel to Document the Evolution of the Engine and to Gather all the learning resources in one place. 
+Also, Planning to make a Blog or a Youtube Channel to Document the Evolution of the Engine and to Gather all the learning resources in one place.
 
 Main Language for Developing the Engine is C++.
 
