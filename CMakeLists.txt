@@ -6,6 +6,8 @@ enable_testing()
 
 add_subdirectory(thirdparty/glfw)
 
+add_subdirectory(thirdparty/spdlog)
+
 add_subdirectory(joya)
 
 add_subdirectory(test_app)

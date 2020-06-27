@@ -2,6 +2,13 @@
 
 namespace JY
 {
+    App::App()
+    {
+    }
+
+    App::~App()
+    {
+    }
     
     void App::Run()
     {

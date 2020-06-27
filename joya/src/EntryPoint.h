@@ -1,3 +1,8 @@
+#ifndef ENTRYPOINT_H
+#define ENTRYPOINT_H
+
+
+
 
 extern JY::App* JY::CreateApp();
 
@@ -8,3 +13,5 @@ int main(int argc, char const *argv[])
     delete app;
 
 }
+
+#endif // !ENTRYPOINT_H
