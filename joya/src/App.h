@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Core.h"
+#include "Log.h"
 
 namespace JY
 {

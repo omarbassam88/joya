@@ -1,6 +1,7 @@
 
 add_library(joya 
     App.cpp
+    Log.cpp
 )
 
 target_include_directories(joya INTERFACE ${JOYA_SOURCE_DIR}/joya/include)

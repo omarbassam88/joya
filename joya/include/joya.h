@@ -8,6 +8,7 @@
 // Entry Point
 #include "EntryPoint.h"
 
+#include "Log.h"
 
 
 #endif // !JOYA_H
