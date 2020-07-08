@@ -5,6 +5,7 @@ namespace JY
 {
     App::App()
     {
+
     }
 
     App::~App()
@@ -17,13 +18,14 @@ namespace JY
         JY::Log *console;
         console->Init();
         JY_INFO("App is Initialised successfully");
-        Window *win;
+        Window *win= new Window();
         win->CreateWindow();
         while (true)
         {
-            // win->CreateWindow();
+            win->Update();
             JY_WARN("App is running");
             sleep(10);
+            win->Destroy();
         }
     }
 } // namespace JY

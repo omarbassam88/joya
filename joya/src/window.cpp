@@ -11,7 +11,11 @@ namespace JY
     void Window::CreateWindow()
     {
         glfwInit();
-        GLFWwindow *window = glfwCreateWindow(1280, 720, "Hello, JOYA", NULL, NULL);
+        std::cout << window << std::endl;
+        window = glfwCreateWindow(1280, 720, "Hello, JOYA", NULL, NULL);
+        // window = win;
+        std::cout << window << std::endl;
+        
 
         if (!window)
         {
@@ -21,16 +25,22 @@ namespace JY
         /* Make the window's context current */
         glfwMakeContextCurrent(window);
 
-        /* Loop until the user closes the window */
+       
+    }
+
+    void Window::Update()
+    {
+         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             /* Render here */
             // glClear(GL_COLOR_BUFFER_BIT);
 
-            /* Swap front and back buffers */
+
+        //     /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
-            /* Poll for and process events */
+        //     /* Poll for and process events */
             glfwPollEvents();
         }
 
@@ -39,6 +49,7 @@ namespace JY
 
     void Window::Destroy()
     {
-        // glfwDestroyWindow(window);
+        glfwDestroyWindow(window);
+        JY_INFO("Window is now destroyed");
     }
 } // namespace JY

@@ -10,13 +10,15 @@ namespace JY
     {
     private:
         /* data */
-        // GLFWwindow *window;
+        GLFWwindow *window;
+
         
 
     public:
         Window(/* args */);
         ~Window();
         void CreateWindow();
+        void Update();
         void Destroy();
     };
 

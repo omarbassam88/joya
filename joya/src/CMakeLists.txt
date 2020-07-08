@@ -10,4 +10,5 @@ target_include_directories(joya PUBLIC ${JOYA_SOURCE_DIR}/joya/src)
 
 target_link_libraries(joya glfw)
 
+
 target_link_libraries(joya spdlog)
