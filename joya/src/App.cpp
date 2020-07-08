@@ -1,4 +1,5 @@
 #include "App.h"
+#include "window.h"
 
 namespace JY
 {
@@ -16,5 +17,13 @@ namespace JY
         JY::Log *console;
         console->Init();
         JY_INFO("App is Initialised successfully");
+        Window *win;
+        win->CreateWindow();
+        while (true)
+        {
+            // win->CreateWindow();
+            JY_WARN("App is running");
+            sleep(10);
+        }
     }
 } // namespace JY

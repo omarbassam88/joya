@@ -9,6 +9,7 @@
 #include "EntryPoint.h"
 
 #include "Log.h"
+#include "window.h"
 
 
 #endif // !JOYA_H
