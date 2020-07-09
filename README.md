@@ -17,6 +17,7 @@ Main Language for Developing the Engine is C++.
 Tools and Libraries used (so far):
 
 - Linux (POP OS 20.04 LTS)
-- VSCode
-- CMake
-- GLFW
+- VSCode (Code Editor)
+- CMake (Build System)
+- GLFW (Cross-Platform Window and Event Management System)
+- spdlog (Logging Library)
