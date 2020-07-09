@@ -1,10 +1,10 @@
 #include "App.h"
-#include "window.h"
 
 namespace JY
 {
     App::App()
     {
+
 
     }
 
@@ -18,14 +18,15 @@ namespace JY
         JY::Log *console;
         console->Init();
         JY_INFO("App is Initialised successfully");
-        Window *win= new Window();
-        win->CreateWindow();
+        win = new Window();
+        win->CreateWindow(640, 480, "Hello JOYA APP");
         while (true)
         {
             win->Update();
             JY_WARN("App is running");
-            sleep(10);
-            win->Destroy();
+
+            break;
         }
+            win->Destroy();
     }
 } // namespace JY

@@ -8,13 +8,16 @@
 #include <iostream>
 #include "Core.h"
 #include "Log.h"
+#include "window.h"
 
 namespace JY
 {
     class App
     {
     private:
+
     public:
+        Window *win;
         App();
         virtual ~App();
         void Run();

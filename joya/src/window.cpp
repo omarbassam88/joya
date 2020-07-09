@@ -8,11 +8,15 @@ namespace JY
         JY_INFO("Window is Initializing");
     }
 
-    void Window::CreateWindow()
+    void Window::CreateWindow(int wWidth , int wHeight , const char* wName )
     {
+
+        Width = wWidth;
+        Height = wHeight;
+        Name = wName;
         glfwInit();
         std::cout << window << std::endl;
-        window = glfwCreateWindow(1280, 720, "Hello, JOYA", NULL, NULL);
+        window = glfwCreateWindow(Width, Height, Name, NULL, NULL);
         // window = win;
         std::cout << window << std::endl;
         
