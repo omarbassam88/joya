@@ -13,7 +13,7 @@ namespace JY
     {
     private:
         /* data */
-        GLFWwindow *window;
+        GLFWwindow *m_window;
         const char* Name;
         int Width;
         int Height;

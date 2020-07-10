@@ -17,7 +17,7 @@ namespace JY
     private:
 
     public:
-        Window *win;
+        Window *m_win;
         App();
         virtual ~App();
         void Run();

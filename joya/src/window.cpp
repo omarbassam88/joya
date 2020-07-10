@@ -15,34 +15,34 @@ namespace JY
         Height = wHeight;
         Name = wName;
         glfwInit();
-        std::cout << window << std::endl;
-        window = glfwCreateWindow(Width, Height, Name, NULL, NULL);
-        // window = win;
-        std::cout << window << std::endl;
+        std::cout << m_window << std::endl;
+        m_window = glfwCreateWindow(Width, Height, Name, NULL, NULL);
+        // m_window = win;
+        std::cout << m_window << std::endl;
         
 
-        if (!window)
+        if (!m_window)
         {
             glfwTerminate();
             JY_CRITICAL("Window Could not be Created");
         }
-        /* Make the window's context current */
-        glfwMakeContextCurrent(window);
+        /* Make the m_window's context current */
+        glfwMakeContextCurrent(m_window);
 
        
     }
 
     void Window::Update()
     {
-         /* Loop until the user closes the window */
-        while (!glfwWindowShouldClose(window))
+         /* Loop until the user closes the m_window */
+        while (!glfwWindowShouldClose(m_window))
         {
             /* Render here */
             // glClear(GL_COLOR_BUFFER_BIT);
 
 
         //     /* Swap front and back buffers */
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(m_window);
 
         //     /* Poll for and process events */
             glfwPollEvents();
@@ -53,7 +53,7 @@ namespace JY
 
     void Window::Destroy()
     {
-        glfwDestroyWindow(window);
+        glfwDestroyWindow(m_window);
         JY_INFO("Window is now destroyed");
     }
 } // namespace JY
