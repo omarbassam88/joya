@@ -31,6 +31,8 @@ namespace JY
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
 
+        JY_INFO("OpenGL : {}", glGetString(GL_VERSION));
+
         glfwSetKeyCallback(m_window, ToggleFullScreen);
     }
 
@@ -73,14 +75,7 @@ namespace JY
         int width;
         int height;
         glfwGetWindowSize(window, &width, &height);
-        if (width == 1920)
-        {
-            fullscreen = true;
-        }
-        else
-        {
-            fullscreen = false;
-        }
+        fullscreen = width == 1920;
 
         if (key == GLFW_KEY_F11 && action == GLFW_PRESS)
         {

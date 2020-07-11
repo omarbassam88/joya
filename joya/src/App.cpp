@@ -25,8 +25,6 @@ namespace JY
             m_win->Clear();
             m_win->Update();
             // JY_WARN("App is running");
-
-            
         }
             m_win->Destroy();
     }
