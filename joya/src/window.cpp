@@ -3,22 +3,25 @@
 
 namespace JY
 {
-    Window::Window()
+    Window::Window(int Width, int Height, const char *Title)
+        : m_Width(Width),
+          m_Height(Height),
+          m_Title(Title),
+          m_closed(false)
     {
-        JY_INFO("Window is Initializing");
+        JY_INFO("Window is Initializing with Width: {}, Height: {} and Title: {}", m_Width, m_Height, m_Title);
     }
 
-    void Window::CreateWindow(int wWidth, int wHeight, const char *wName)
+    void Window::Start()
     {
 
-        Width = wWidth;
-        Height = wHeight;
-        Name = wName;
-        glfwInit();
-        std::cout << m_window << std::endl;
-        m_window = glfwCreateWindow(Width, Height, Name, NULL, NULL);
-        // m_window = win;
-        std::cout << m_window << std::endl;
+        if (!glfwInit())
+        {
+            JY_CRITICAL("GLFW Could not be initialized");
+        }
+
+        // Creating the window with the data from the class members
+        m_window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 
         if (!m_window)
         {
@@ -27,41 +30,28 @@ namespace JY
         }
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
+
+        glfwSetKeyCallback(m_window, ToggleFullScreen);
+    }
+
+    void Window::Clear()
+    {
+        glClearColor(0.2, 0.3, 0.8, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 
     void Window::Update()
     {
-        /* Loop until the user closes the m_window */
-        while (!glfwWindowShouldClose(m_window))
+        //     /* Swap front and back buffers */
+        glfwSwapBuffers(m_window);
+
+        //     /* Poll for and process events */
+        glfwPollEvents();
+
+        if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(m_window))
         {
-            /* Render here */
-            glClear(GL_COLOR_BUFFER_BIT);
 
-            //     /* Swap front and back buffers */
-            glfwSwapBuffers(m_window);
-
-            //     /* Poll for and process events */
-            glfwPollEvents();
-
-            if (glfwGetKey(m_window, GLFW_KEY_F11) == GLFW_PRESS)
-            {
-                if (!m_fullscreen)
-                {
-                    glfwSetWindowSize(m_window, 1920, 1080);
-                    JY_WARN("FULLSCREEN");
-                }
-                else
-                {
-                    glfwSetWindowSize(m_window, Width, Height);
-                    JY_WARN("NOT FULLSCREEN");
-                }
-                m_fullscreen = !m_fullscreen;
-            }
-
-            if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            {
-                glfwWindowShouldClose(m_window);
-            }
+            m_closed = true;
         }
     }
 
@@ -71,4 +61,43 @@ namespace JY
         glfwTerminate();
         JY_INFO("Window is now destroyed");
     }
+
+    bool Window::Closed()
+    {
+        return m_closed;
+    }
+
+    void ToggleFullScreen(GLFWwindow *window, int key, int scancode, int action, int mods)
+    {
+        bool fullscreen;
+        int width;
+        int height;
+        glfwGetWindowSize(window, &width, &height);
+        if (width == 1920)
+        {
+            fullscreen = true;
+        }
+        else
+        {
+            fullscreen = false;
+        }
+
+        if (key == GLFW_KEY_F11 && action == GLFW_PRESS)
+        {
+
+            if (!fullscreen)
+            {
+                glfwSetWindowSize(window, 1920, 1080);
+                JY_WARN("FULLSCREEN");
+                fullscreen = true;
+            }
+            else
+            {
+                glfwSetWindowSize(window, 640, 480);
+                JY_WARN("NOT FULLSCREEN");
+                fullscreen = false;
+            }
+        }
+    }
+
 } // namespace JY

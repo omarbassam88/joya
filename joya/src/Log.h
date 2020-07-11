@@ -29,11 +29,11 @@ namespace JY
 } // namespace JY
 
 
-#define JY_TRACE(x)     JY::Log::logger->trace(x)
-#define JY_INFO(x)      JY::Log::logger->info(x)
-#define JY_WARN(x)      JY::Log::logger->warn(x)
-#define JY_ERROR(x)     JY::Log::logger->error(x)
-#define JY_CRITICAL(x)  JY::Log::logger->critical(x)
+#define JY_TRACE(...)     JY::Log::logger->trace(__VA_ARGS__)
+#define JY_INFO(...)      JY::Log::logger->info(__VA_ARGS__)
+#define JY_WARN(...)      JY::Log::logger->warn(__VA_ARGS__)
+#define JY_ERROR(...)     JY::Log::logger->error(__VA_ARGS__)
+#define JY_CRITICAL(...)  JY::Log::logger->critical(__VA_ARGS__)
 
 
 
