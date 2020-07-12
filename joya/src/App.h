@@ -3,8 +3,6 @@
 #ifndef APP_H
 #define APP_H
 
-
-
 #include <iostream>
 #include "Core.h"
 #include "Log.h"
@@ -15,7 +13,6 @@ namespace JY
     class App
     {
     private:
-
     public:
         Window *m_win;
         App();
@@ -23,10 +20,8 @@ namespace JY
         void Run();
     };
 
-
-
-    // To be Defined in Client 
-    App* CreateApp();
+    // To be Defined in Client
+    App *CreateApp();
 
 } // namespace JY
 

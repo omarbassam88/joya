@@ -16,6 +16,11 @@ namespace JY
         int m_Height;
         bool m_fullscreen = false;
         bool m_closed;
+        double m_mousex, m_mousey;
+        static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+        static void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+        static void window_size_callback(GLFWwindow *window, int width, int height);
+        static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 
     public:
         Window(int wWidth = 1280, int wHeight = 720, const char *wName = "JOYA");
@@ -25,12 +30,11 @@ namespace JY
         void Update();
         void Destroy();
         bool Closed();
+        void ToggleFullScreen();
         inline int GetWidth() { return m_Width; }
         inline int GetHeight() { return m_Height; }
         inline std::string GetTitle() { return m_Title; }
     };
-    void ToggleFullScreen(GLFWwindow *window, int key, int scancode, int action, int mods);
-
 } // namespace JY
 
 #endif // !WINDOW_H
