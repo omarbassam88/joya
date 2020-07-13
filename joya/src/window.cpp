@@ -49,6 +49,7 @@ namespace JY
 
     void Window::Update()
     {
+        glClear(GL_COLOR_BUFFER_BIT);
         //     /* Swap front and back buffers */
         glfwSwapBuffers(m_window);
 
@@ -94,18 +95,14 @@ namespace JY
     {
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-        glfwGetWindowSize(m_window, &m_Width, &m_Height);
-        m_fullscreen = m_Width == 1920;
         if (!m_fullscreen)
         {
             glfwSetWindowMonitor(m_window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
-            JY_WARN("FULLSCREEN");
             m_fullscreen = true;
         }
         else
         {
-            glfwSetWindowMonitor(m_window, NULL, 500, 500, 640, 480, mode->refreshRate);
-            JY_WARN("NOT FULLSCREEN");
+            glfwSetWindowMonitor(m_window, NULL, 500, 250, 800, 600, mode->refreshRate);
             m_fullscreen = false;
         }
     }
@@ -114,10 +111,24 @@ namespace JY
     {
         Window *win = (Window *)glfwGetWindowUserPointer(window);
 
-        if (key == GLFW_KEY_F11 && action == GLFW_PRESS)
+        if (action == GLFW_PRESS)
         {
-            win->ToggleFullScreen();
+            switch (key)
+            {
+            case GLFW_KEY_F11:
+                win->ToggleFullScreen();
+                break;
+            case GLFW_KEY_F:
+                win->ToggleFullScreen();
+                break;
+            
+            default:
+            JY_INFO("UnAssigned key is pressed");
+                break;
+            }
         }
+        
+
     }
 
     void Window::mouse_button_callback(GLFWwindow *window, int button, int action, int mods)

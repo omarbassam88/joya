@@ -18,11 +18,11 @@ namespace JY
         JY::Log *console;
         console->Init();
         JY_INFO("App is Initialised successfully");
-        m_win = new Window(640, 480, "Hello JOYA APP");
+        m_win = std::make_unique<Window>(640, 480, "Hello JOYA APP");
         m_win->Start();
+            m_win->Clear();
         while (!m_win->Closed())
         {
-            m_win->Clear();
             m_win->Update();
             // JY_WARN("App is running");
         }

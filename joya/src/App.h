@@ -3,6 +3,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include <memory>
 #include <iostream>
 #include "Core.h"
 #include "Log.h"
@@ -14,7 +15,7 @@ namespace JY
     {
     private:
     public:
-        Window *m_win;
+        std::unique_ptr<Window> m_win;
         App();
         virtual ~App();
         void Run();
