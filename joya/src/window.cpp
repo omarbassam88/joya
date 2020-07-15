@@ -12,6 +12,9 @@ namespace JY
         JY_INFO("Window is Initializing with Width: {}, Height: {} and Title: {}", m_Width, m_Height, m_Title);
     }
 
+    Window::~Window()
+    {
+    }
     void Window::Start()
     {
 
@@ -31,14 +34,21 @@ namespace JY
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
 
-        glfwSetWindowUserPointer(m_window, this);
-
         JY_INFO("OpenGL : {}", glGetString(GL_VERSION));
+
+        glfwSetWindowUserPointer(m_window,this);
 
         glfwSetKeyCallback(m_window, key_callback);
         glfwSetMouseButtonCallback(m_window, mouse_button_callback);
         glfwSetWindowSizeCallback(m_window, window_size_callback);
         glfwSetCursorPosCallback(m_window, cursor_position_callback);
+        glfwSetWindowCloseCallback(m_window, close_window_callback);
+    }
+
+    void Window::SetEventCallback(std::function<void(Event &)> callback)
+    {
+
+        EventCallbackFn = callback;
     }
 
     void Window::Clear()
@@ -56,11 +66,11 @@ namespace JY
         //     /* Poll for and process events */
         glfwPollEvents();
 
-        if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(m_window))
-        {
+        // if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(m_window))
+        // {
 
-            m_closed = true;
-        }
+        //     m_closed = true;
+        // }
     }
 
     void Window::Destroy()
@@ -75,25 +85,10 @@ namespace JY
         return m_closed;
     }
 
-    void Window::window_size_callback(GLFWwindow *window, int width, int height)
-    {
-        Window *win = (Window *)glfwGetWindowUserPointer(window);
-        win->m_Width = width;
-        win->m_Height = height;
-        JY_WARN("Width: {}, Hieght: {}", win->m_Width, win->m_Height);
-    }
-
-    void Window::cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
-    {
-        Window *win = (Window *)glfwGetWindowUserPointer(window);
-        win->m_mousex = xpos;
-        win->m_mousey = ypos;
-        JY_INFO("x: {},y: {}", win->m_mousex, win->m_mousey);
-    }
-
     void Window::ToggleFullScreen()
     {
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+
         const GLFWvidmode *mode = glfwGetVideoMode(monitor);
         if (!m_fullscreen)
         {
@@ -107,28 +102,48 @@ namespace JY
         }
     }
 
+    void Window::window_size_callback(GLFWwindow *window, int width, int height)
+    {
+
+        JY_WARN("Width: {}, Hieght: {}", width, height);
+    }
+
+    void Window::cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
+    {
+
+        JY_INFO("x: {},y: {}", xpos, ypos);
+    }
+
+    void Window::close_window_callback(GLFWwindow *window)
+    {
+        Window &instance = *(Window*) (glfwGetWindowUserPointer(window));
+        JY_ERROR("CLOSING WINDOW");
+        Event e;
+        instance.EventCallbackFn(e);
+        
+    }
+
     void Window::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
     {
-        Window *win = (Window *)glfwGetWindowUserPointer(window);
+
+        // App *instance = (App *)glfwGetWindowUserPointer(window);
 
         if (action == GLFW_PRESS)
         {
             switch (key)
             {
-            case GLFW_KEY_F11:
-                win->ToggleFullScreen();
-                break;
-            case GLFW_KEY_F:
-                win->ToggleFullScreen();
-                break;
-            
+            // case GLFW_KEY_F11:
+            //     ToggleFullScreen();
+            //     break;
+            // case GLFW_KEY_F:
+            //     ToggleFullScreen();
+            //     break;
+
             default:
-            JY_INFO("UnAssigned key is pressed");
+                JY_INFO("UnAssigned key is pressed");
                 break;
             }
         }
-        
-
     }
 
     void Window::mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
