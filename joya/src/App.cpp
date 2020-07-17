@@ -32,7 +32,16 @@ namespace JY
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowResizeEvent>(std::bind(&App::OnWindowResize, this, std::placeholders::_1));
         dispatcher.Dispatch<WindowCloseEvent>(std::bind(&App::OnWindowClose, this, std::placeholders::_1));
+    }
 
+    void App::PushLayer(Layer *layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+
+    void App::PushOverlay(Layer *layer)
+    {
+        m_LayerStack.PushOverlay(layer);
     }
 
     bool App::Quit()
@@ -47,8 +56,8 @@ namespace JY
         JY_WARN("Width: {}, Hieght: {}", e.GetWidth(), e.GetHeight());
         return true;
     }
-    
-    bool App::OnWindowClose(WindowCloseEvent &e) 
+
+    bool App::OnWindowClose(WindowCloseEvent &e)
     {
         Quit();
         return true;

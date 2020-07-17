@@ -9,6 +9,8 @@
 #include "Log.h"
 #include "window.h"
 #include "Events/Event.h"
+#include "Layer.h"
+#include "LayerStack.h"
 
 namespace JY
 {
@@ -20,12 +22,17 @@ namespace JY
         bool m_fullscreen;
         double m_mousex, m_mousey;
         Log *console;
+        LayerStack m_LayerStack;
 
     public:
         App();
         virtual ~App();
         void Run();
         void OnEvent(Event &e);
+
+        void PushLayer(Layer *layer);
+        void PushOverlay(Layer *layer);
+
         bool OnWindowResize(WindowResizeEvent &e);
         bool OnWindowClose(WindowCloseEvent &e);
         bool Quit();

@@ -3,6 +3,9 @@ add_library(joya
     App.cpp
     Log.cpp
     window.cpp
+    Layer.cpp
+    LayerStack.cpp
+    UILayer.cpp
 )
 
 target_include_directories(joya INTERFACE ${JOYA_SOURCE_DIR}/joya/include)
