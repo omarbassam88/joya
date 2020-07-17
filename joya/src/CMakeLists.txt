@@ -12,4 +12,6 @@ target_link_libraries(joya
     GL
     glfw 
     spdlog
+    glad
+    imgui
 )

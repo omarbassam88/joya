@@ -4,15 +4,13 @@ namespace JY
 {
     App::App()
     {
-
-        JY::Log *console;
         console->Init();
-        JY_INFO("App is Initialised successfully");
         m_win = std::make_unique<Window>(1280, 720, "Hello JOYA APP");
         m_win->Start();
         m_win->SetEventCallback(std::bind(&App::OnEvent, this, std::placeholders::_1));
         m_win->Clear();
         m_Running = true;
+        JY_INFO("App is Initialised successfully");
     }
 
     App::~App()
@@ -21,11 +19,9 @@ namespace JY
 
     void App::Run()
     {
-
         while (m_Running)
         {
             m_win->Update();
-            // JY_WARN("App is running");
         }
         m_win->Destroy();
     }
@@ -33,13 +29,29 @@ namespace JY
     void App::OnEvent(Event &e)
     {
 
-        JY_WARN("EVENT IS TRIGGERED");
-        Quit();
+        EventDispatcher dispatcher(e);
+        dispatcher.Dispatch<WindowResizeEvent>(std::bind(&App::OnWindowResize, this, std::placeholders::_1));
+        dispatcher.Dispatch<WindowCloseEvent>(std::bind(&App::OnWindowClose, this, std::placeholders::_1));
+
     }
 
-    void App::Quit()
+    bool App::Quit()
     {
         m_Running = false;
+        return true;
+    }
+
+    bool App::OnWindowResize(WindowResizeEvent &e)
+    {
+
+        JY_WARN("Width: {}, Hieght: {}", e.GetWidth(), e.GetHeight());
+        return true;
+    }
+    
+    bool App::OnWindowClose(WindowCloseEvent &e) 
+    {
+        Quit();
+        return true;
     }
 
 } // namespace JY

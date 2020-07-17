@@ -6,7 +6,11 @@ enable_testing()
 
 add_subdirectory(thirdparty/glfw)
 
+add_subdirectory(thirdparty/glad)
+
 add_subdirectory(thirdparty/spdlog)
+
+add_subdirectory(thirdparty/imgui)
 
 add_subdirectory(joya)
 

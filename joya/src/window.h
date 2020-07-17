@@ -1,10 +1,12 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <glad/glad.h>
 #include "GLFW/glfw3.h"
 #include <string>
 #include <functional>
 #include "Events/Event.h"
+#include "Events/WindowEvent.h"
 
 namespace JY
 {
@@ -41,6 +43,7 @@ namespace JY
         static void window_size_callback(GLFWwindow *window, int width, int height);
         static void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
         static void close_window_callback(GLFWwindow *window);
+        static void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
     };
 } // namespace JY
 

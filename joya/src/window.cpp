@@ -1,5 +1,6 @@
 #include "window.h"
 #include "Log.h"
+#include <string>
 
 namespace JY
 {
@@ -15,6 +16,7 @@ namespace JY
     Window::~Window()
     {
     }
+
     void Window::Start()
     {
 
@@ -33,22 +35,22 @@ namespace JY
         }
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
-
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         JY_INFO("OpenGL : {}", glGetString(GL_VERSION));
 
-        glfwSetWindowUserPointer(m_window,this);
+        glfwSetWindowUserPointer(m_window, this);
 
         glfwSetKeyCallback(m_window, key_callback);
         glfwSetMouseButtonCallback(m_window, mouse_button_callback);
         glfwSetWindowSizeCallback(m_window, window_size_callback);
         glfwSetCursorPosCallback(m_window, cursor_position_callback);
         glfwSetWindowCloseCallback(m_window, close_window_callback);
+        glfwSetScrollCallback(m_window, scroll_callback);
     }
 
     void Window::SetEventCallback(std::function<void(Event &)> callback)
     {
-
-        EventCallbackFn = callback;
+        EventCallbackFn = callback; // Links to App::OnEvent
     }
 
     void Window::Clear()
@@ -65,12 +67,6 @@ namespace JY
 
         //     /* Poll for and process events */
         glfwPollEvents();
-
-        // if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(m_window))
-        // {
-
-        //     m_closed = true;
-        // }
     }
 
     void Window::Destroy()
@@ -102,42 +98,40 @@ namespace JY
         }
     }
 
+    // Window Events
+
     void Window::window_size_callback(GLFWwindow *window, int width, int height)
     {
-
-        JY_WARN("Width: {}, Hieght: {}", width, height);
-    }
-
-    void Window::cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
-    {
-
-        JY_INFO("x: {},y: {}", xpos, ypos);
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
+        WindowResizeEvent e(width, height);
+        instance.EventCallbackFn(e);
     }
 
     void Window::close_window_callback(GLFWwindow *window)
     {
-        Window &instance = *(Window*) (glfwGetWindowUserPointer(window));
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
         JY_ERROR("CLOSING WINDOW");
-        Event e;
+        WindowCloseEvent e;
         instance.EventCallbackFn(e);
-        
     }
+
+    // Keyboard Events
 
     void Window::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
     {
 
-        // App *instance = (App *)glfwGetWindowUserPointer(window);
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
 
         if (action == GLFW_PRESS)
         {
             switch (key)
             {
-            // case GLFW_KEY_F11:
-            //     ToggleFullScreen();
-            //     break;
-            // case GLFW_KEY_F:
-            //     ToggleFullScreen();
-            //     break;
+                // case GLFW_KEY_F11:
+                //     ToggleFullScreen();
+                //     break;
+                // case GLFW_KEY_F:
+                //     ToggleFullScreen();
+                //     break;
 
             default:
                 JY_INFO("UnAssigned key is pressed");
@@ -146,8 +140,11 @@ namespace JY
         }
     }
 
+    // Mouse Events
+
     void Window::mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
     {
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
         if (action == GLFW_PRESS)
         {
             switch (button)
@@ -167,4 +164,15 @@ namespace JY
         }
     }
 
+    void Window::cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
+    {
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
+        JY_INFO("x: {},y: {}", xpos, ypos);
+    }
+
+    void Window::scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
+    {
+        Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
+        JY_INFO("Scroll Ofsset {}", yoffset);
+    }
 } // namespace JY

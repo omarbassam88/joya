@@ -17,12 +17,35 @@ namespace JY
         MouseScrolled
     };
 
+    enum EventCategory
+    {
+        None = 0,
+        EventCategoryWindow,
+        EventCategoryInput,
+        EventCategoryKeyboard,
+        EventCategoryMouse
+    };
+
     class Event
     {
     private:
+
     public:
-        virtual ~Event() = default;
+        bool Handled;
+
+        ~Event() = default;
+        virtual std::string GetName() const = 0;
+        virtual EventType GetEventType() const = 0;
+        virtual int GetCategoryFlags() const = 0;
     };
+
+#define EVENT_CLASS_TYPE(type)                                                  \
+    static EventType GetStaticType() { return EventType::type; }                \
+    virtual EventType GetEventType() const override { return GetStaticType(); } \
+    virtual std::string GetName() const override { return #type; }
+
+#define EVENT_CLASS_CATEGORY(category) \
+    virtual int GetCategoryFlags() const override { return category; }
 
     class EventDispatcher
     {
@@ -35,7 +58,19 @@ namespace JY
             : m_Event(event)
         {
         }
-        ~EventDispatcher();
+        ~EventDispatcher()= default;
+        template<typename T,typename F>
+        bool Dispatch(const F& func)
+        {
+            if (m_Event.GetEventType() == T::GetStaticType())
+            {
+                m_Event.Handled = func(static_cast<T&>(m_Event));
+                return true;
+            }
+            
+
+            return false;
+        }
     };
 
 } // namespace JY

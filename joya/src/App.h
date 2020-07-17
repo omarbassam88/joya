@@ -15,21 +15,20 @@ namespace JY
     class App
     {
     private:
-    bool m_Running= false;
-    bool m_fullscreen;
-    bool m_closed;
-    double m_mousex,m_mousey;
-    public:
         std::unique_ptr<Window> m_win;
+        bool m_Running = false;
+        bool m_fullscreen;
+        double m_mousex, m_mousey;
+        Log *console;
+
+    public:
         App();
         virtual ~App();
         void Run();
         void OnEvent(Event &e);
-        void Quit();
-
-
-
-
+        bool OnWindowResize(WindowResizeEvent &e);
+        bool OnWindowClose(WindowCloseEvent &e);
+        bool Quit();
     };
 
     // To be Defined in Client
