@@ -5,6 +5,7 @@ add_library(joya
     window.cpp
     Layer.cpp
     LayerStack.cpp
+    ImGuiBuild.cpp
     UILayer.cpp
 )
 

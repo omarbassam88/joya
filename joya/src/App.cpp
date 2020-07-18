@@ -2,14 +2,22 @@
 
 namespace JY
 {
+
+    App *App::s_Instance = nullptr;
+
     App::App()
     {
+        s_Instance = this;
         console->Init();
         m_win = std::make_unique<Window>(1280, 720, "Hello JOYA APP");
         m_win->Start();
         m_win->SetEventCallback(std::bind(&App::OnEvent, this, std::placeholders::_1));
         m_win->Clear();
         m_Running = true;
+        ui = new UILayer();
+        JY_INFO("{}", ui->GetName());
+        PushOverlay(ui);
+
         JY_INFO("App is Initialised successfully");
     }
 
@@ -22,6 +30,7 @@ namespace JY
         while (m_Running)
         {
             m_win->Update();
+            ui->OnUpdate();
         }
         m_win->Destroy();
     }
@@ -37,11 +46,13 @@ namespace JY
     void App::PushLayer(Layer *layer)
     {
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void App::PushOverlay(Layer *layer)
     {
         m_LayerStack.PushOverlay(layer);
+        layer->OnAttach();
     }
 
     bool App::Quit()

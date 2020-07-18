@@ -35,6 +35,7 @@ namespace JY
         }
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
+        glfwSwapInterval(1);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         JY_INFO("OpenGL : {}", glGetString(GL_VERSION));
 
@@ -63,7 +64,7 @@ namespace JY
     {
         glClear(GL_COLOR_BUFFER_BIT);
         //     /* Swap front and back buffers */
-        glfwSwapBuffers(m_window);
+        // glfwSwapBuffers(m_window);
 
         //     /* Poll for and process events */
         glfwPollEvents();

@@ -2,7 +2,8 @@
 #define __UILAYER_H__
 
 #include "Layer.h"
-#include "imgui/imgui.h"
+
+
 
 namespace JY
 {
@@ -11,12 +12,14 @@ namespace JY
     private:
         /* data */
     public:
-        UILayer(/* args */);
-        ~UILayer();
+        UILayer();
+        ~UILayer() = default;
+        virtual void OnAttach() override;
+        virtual void OnDetach() override;
+        virtual void OnUpdate() override;
+        virtual void OnEvent(Event &e) override;
     };
-    
 
-    
 } // namespace JY
 
 #endif // __UILAYER_H__

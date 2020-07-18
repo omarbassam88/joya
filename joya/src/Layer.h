@@ -9,17 +9,18 @@ namespace JY
     class Layer
     {
     private:
-        std::string m_Name;
-
     public:
-        Layer(const std::string& name = "Layer");
-        virtual ~Layer();
-        virtual void OnAttach();
-        virtual void OnDetach();
-        virtual void OnUpdate();
-        virtual void OnEvent(Event &e);
+        Layer(const std::string &name = "Layer");
+        virtual ~Layer() = default;
+        virtual void OnAttach(){}
+        virtual void OnDetach(){}
+        virtual void OnUpdate(){}
+        virtual void OnEvent(Event &e){}
 
-        const std::string& GetName() { return m_Name; }
+        const std::string &GetName() { return m_Name; }
+
+    protected:
+        std::string m_Name;
     };
 
 } // namespace JY
