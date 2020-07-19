@@ -2,6 +2,7 @@
 #define __MOUSEEVENT_H__
 
 #include "Event.h"
+#include "../MouseCodes.h"
 
 namespace JY
 {
