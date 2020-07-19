@@ -27,8 +27,6 @@ namespace JY
         GLFWwindow *window = static_cast<GLFWwindow *>(App::s_Instance->GetWindow().GetWindow());
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
-
-
     }
 
     void UILayer::OnDetach()
@@ -89,6 +87,25 @@ namespace JY
 
     void UILayer::OnEvent(Event &e)
     {
+        EventDispatcher dispatcher(e);
+        dispatcher.Dispatch<MouseButtonPressed>(std::bind(&UILayer::OnMouseButtonPressed, this, std::placeholders::_1));
+        dispatcher.Dispatch<MouseButtonReleased>(std::bind(&UILayer::OnMouseButtonReleased, this, std::placeholders::_1));
+    }
+
+    bool UILayer::OnMouseButtonPressed(MouseButtonPressed &e)
+    {
+        ImGuiIO &io = ImGui::GetIO();
+        io.MouseDown[e.GetButton()] = true;
+        JY_INFO("IMGUI Mouse BUTTON {} PRESSED",e.GetButton());
+        return false;
+    }
+
+    bool UILayer::OnMouseButtonReleased(MouseButtonReleased &e)
+    {
+        ImGuiIO &io = ImGui::GetIO();
+        io.MouseDown[e.GetButton()] = false;
+        JY_INFO("IMGUI Mouse BUTTON {} RELEASED",e.GetButton());
+        return false;
     }
 
 } // namespace JY

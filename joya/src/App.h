@@ -12,6 +12,7 @@
 #include "Layer.h"
 #include "LayerStack.h"
 #include "UILayer.h"
+#include "Input.h"
 
 namespace JY
 {
@@ -24,7 +25,7 @@ namespace JY
         double m_mousex, m_mousey;
         Log *console;
         LayerStack m_LayerStack;
-        UILayer* ui;
+        UILayer *ui;
 
     public:
         App();
@@ -35,13 +36,12 @@ namespace JY
         void PushLayer(Layer *layer);
         void PushOverlay(Layer *layer);
 
-
-        Window& GetWindow() {return *m_win;}
+        Window &GetWindow() { return *m_win; }
         bool OnWindowResize(WindowResizeEvent &e);
         bool OnWindowClose(WindowCloseEvent &e);
         bool Quit();
 
-        static App* s_Instance;
+        static App *s_Instance;
     };
 
     // To be Defined in Client

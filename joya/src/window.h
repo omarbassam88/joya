@@ -7,6 +7,8 @@
 #include <functional>
 #include "Events/Event.h"
 #include "Events/WindowEvent.h"
+#include "Events/MouseEvent.h"
+#include "Events/KeyEvent.h"
 
 namespace JY
 {
@@ -21,9 +23,9 @@ namespace JY
         bool m_closed;
         double m_mousex, m_mousey;
         std::function<void(Event &)> EventCallbackFn;
+        GLFWwindow *m_window;
 
     public:
-        GLFWwindow *m_window;
         Window(int wWidth = 1280, int wHeight = 720, const char *wName = "JOYA");
         ~Window();
         GLFWwindow *GetWindow() { return m_window; }

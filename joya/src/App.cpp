@@ -31,6 +31,11 @@ namespace JY
         {
             m_win->Update();
             ui->OnUpdate();
+
+            if (Input::IsKeyPressed(GLFW_KEY_ESCAPE))
+            {
+                Quit();
+            }
         }
         m_win->Destroy();
     }
@@ -41,6 +46,11 @@ namespace JY
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowResizeEvent>(std::bind(&App::OnWindowResize, this, std::placeholders::_1));
         dispatcher.Dispatch<WindowCloseEvent>(std::bind(&App::OnWindowClose, this, std::placeholders::_1));
+
+        for (auto it = m_LayerStack.begin(); it != m_LayerStack.end(); it++)
+        {
+            (*it)->OnEvent(e);
+        }
     }
 
     void App::PushLayer(Layer *layer)

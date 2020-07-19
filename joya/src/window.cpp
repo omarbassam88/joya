@@ -122,22 +122,29 @@ namespace JY
     {
 
         Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
-
-        if (action == GLFW_PRESS)
+        switch (action)
         {
-            switch (key)
-            {
-                // case GLFW_KEY_F11:
-                //     ToggleFullScreen();
-                //     break;
-                // case GLFW_KEY_F:
-                //     ToggleFullScreen();
-                //     break;
+        case GLFW_PRESS:
+        {
+            KeyPressedEvent e(static_cast<KeyCode>(key), 0);
+            instance.EventCallbackFn(e);
+            break;
+        }
+        case GLFW_RELEASE:
+        {
+            KeyReleasedEvent e(static_cast<KeyCode>(key));
+            instance.EventCallbackFn(e);
+            break;
+        }
+        case GLFW_REPEAT:
+        {
+            KeyPressedEvent e(static_cast<KeyCode>(key), 1);
+            instance.EventCallbackFn(e);
+            break;
+        }
 
-            default:
-                JY_INFO("UnAssigned key is pressed");
-                break;
-            }
+        default:
+            break;
         }
     }
 
@@ -151,14 +158,55 @@ namespace JY
             switch (button)
             {
             case GLFW_MOUSE_BUTTON_LEFT:
-                JY_INFO("LEFT MOUSE BUTTON");
+            {
+                MouseButtonPressed e(0);
+                instance.EventCallbackFn(e);
+                JY_INFO("LEFT MOUSE BUTTON PRESSED");
                 break;
+            }
             case GLFW_MOUSE_BUTTON_RIGHT:
-                JY_INFO("RIGHT MOUSE BUTTON");
+            {
+                MouseButtonPressed e(1);
+                instance.EventCallbackFn(e);
+                JY_INFO("RIGHT MOUSE BUTTON PRESSED");
                 break;
+            }
             case GLFW_MOUSE_BUTTON_MIDDLE:
-                JY_INFO("MIDDLE MOUSE BUTTON");
+            {
+                MouseButtonPressed e(2);
+                instance.EventCallbackFn(e);
+                JY_INFO("MIDDLE MOUSE BUTTON PRESSED");
                 break;
+            }
+            default:
+                break;
+            }
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            switch (button)
+            {
+            case GLFW_MOUSE_BUTTON_LEFT:
+            {
+                MouseButtonReleased e(1);
+                instance.EventCallbackFn(e);
+                JY_INFO("LEFT MOUSE BUTTON RELEASED");
+                break;
+            }
+            case GLFW_MOUSE_BUTTON_RIGHT:
+            {
+                MouseButtonReleased e(2);
+                instance.EventCallbackFn(e);
+                JY_INFO("RIGHT MOUSE BUTTON RELEASED");
+                break;
+            }
+            case GLFW_MOUSE_BUTTON_MIDDLE:
+            {
+                MouseButtonReleased e(3);
+                instance.EventCallbackFn(e);
+                JY_INFO("MIDDLE MOUSE BUTTON RELEASED");
+                break;
+            }
             default:
                 break;
             }
@@ -168,12 +216,17 @@ namespace JY
     void Window::cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
     {
         Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
+        MouseMoveEvent e(xpos, ypos);
+        instance.EventCallbackFn(e);
+
         JY_INFO("x: {},y: {}", xpos, ypos);
     }
 
     void Window::scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
     {
         Window &instance = *(Window *)(glfwGetWindowUserPointer(window));
+        MouseMoveEvent e(xoffset, yoffset);
+        instance.EventCallbackFn(e);
         JY_INFO("Scroll Ofsset {}", yoffset);
     }
 } // namespace JY

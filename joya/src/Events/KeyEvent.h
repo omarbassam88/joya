@@ -2,6 +2,7 @@
 #define __KEYEVENT_H__
 
 #include "Event.h"
+#include "../KeyCodes.h"
 
 namespace JY
 {
@@ -9,21 +10,30 @@ namespace JY
     {
     private:
         /* data */
+        KeyCode m_Key;
+
     public:
-        KeyEvent(/* args */);
-        ~KeyEvent();
+        KeyEvent(KeyCode key) : m_Key(key) {}
+        ~KeyEvent() = default;
+
+        KeyCode GetKey() { return m_Key; }
+
+        EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryKeyboard)
     };
 
     class KeyPressedEvent : public KeyEvent
     {
     private:
         /* data */
+        int m_RepeatCount;
+
     public:
-        KeyPressedEvent(/* args */);
-        ~KeyPressedEvent();
+        KeyPressedEvent(KeyCode key, int count) : KeyEvent(key), m_RepeatCount(count) {}
+        ~KeyPressedEvent() = default;
+
+        int GetRepeatCount() { return m_RepeatCount; }
 
         EVENT_CLASS_TYPE(KeyPressed)
-        EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryKeyboard)
     };
 
     class KeyReleasedEvent : public KeyEvent
@@ -31,11 +41,10 @@ namespace JY
     private:
         /* data */
     public:
-        KeyReleasedEvent(/* args */);
-        ~KeyReleasedEvent();
+        KeyReleasedEvent(KeyCode key) : KeyEvent(key) {}
+        ~KeyReleasedEvent() = default;
 
         EVENT_CLASS_TYPE(KeyReleased)
-        EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryKeyboard)
     };
 
 } // namespace JY

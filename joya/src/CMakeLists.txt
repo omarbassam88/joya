@@ -7,6 +7,7 @@ add_library(joya
     LayerStack.cpp
     ImGuiBuild.cpp
     UILayer.cpp
+    Input.cpp 
 )
 
 target_include_directories(joya INTERFACE ${JOYA_SOURCE_DIR}/joya/include)
@@ -18,4 +19,5 @@ target_link_libraries(joya
     spdlog
     glad
     imgui
+    glm
 )

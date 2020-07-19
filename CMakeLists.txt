@@ -14,6 +14,8 @@ add_subdirectory(thirdparty/spdlog)
 
 add_subdirectory(thirdparty/imgui)
 
+add_subdirectory(thirdparty/glm)
+
 add_subdirectory(joya)
 
 add_subdirectory(test_app)
