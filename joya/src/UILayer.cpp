@@ -19,8 +19,15 @@ namespace JY
     {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        // ImGuiIO &io = ImGui::GetIO();
-        // (void)io;
+        ImGuiIO &io = ImGui::GetIO();
+        (void)io;
+
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+        //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;   // Enable Docking
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
+        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
         ImGui::StyleColorsDark;
 
@@ -38,28 +45,29 @@ namespace JY
 
     void UILayer::OnUpdate()
     {
-        GLFWwindow *window = static_cast<GLFWwindow *>(App::s_Instance->GetWindow().GetWindow());
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
         bool show_demo_window = true;
-        bool show_another_window = false;
-        ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
 
         // Rendering
         ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
+        ImGuiIO &io = ImGui::GetIO();
+        (void)io;
+
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow *backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
     }
 
     void UILayer::OnEvent(Event &e)
@@ -73,7 +81,7 @@ namespace JY
     {
         ImGuiIO &io = ImGui::GetIO();
         io.MouseDown[e.GetButton()] = true;
-        JY_INFO("IMGUI Mouse BUTTON {} PRESSED",e.GetButton());
+        JY_INFO("IMGUI Mouse BUTTON {} PRESSED", e.GetButton());
         return false;
     }
 
@@ -81,7 +89,7 @@ namespace JY
     {
         ImGuiIO &io = ImGui::GetIO();
         io.MouseDown[e.GetButton()] = false;
-        JY_INFO("IMGUI Mouse BUTTON {} RELEASED",e.GetButton());
+        JY_INFO("IMGUI Mouse BUTTON {} RELEASED", e.GetButton());
         return false;
     }
 

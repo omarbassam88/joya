@@ -35,11 +35,11 @@ namespace JY
         }
         /* Make the m_window's context current */
         glfwMakeContextCurrent(m_window);
-        glfwSwapInterval(1);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         JY_INFO("OpenGL : {}", glGetString(GL_VERSION));
 
         glfwSetWindowUserPointer(m_window, this);
+        glfwSwapInterval(1);
 
         glfwSetKeyCallback(m_window, key_callback);
         glfwSetMouseButtonCallback(m_window, mouse_button_callback);
@@ -62,12 +62,8 @@ namespace JY
 
     void Window::Update()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        //     /* Swap front and back buffers */
-        // glfwSwapBuffers(m_window);
-
-        //     /* Poll for and process events */
         glfwPollEvents();
+        glfwSwapBuffers(m_window);
     }
 
     void Window::Destroy()

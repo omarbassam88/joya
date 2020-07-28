@@ -13,6 +13,7 @@
 #include "LayerStack.h"
 #include "UILayer.h"
 #include "Input.h"
+#include "Render/Shader.h"
 
 namespace JY
 {
@@ -25,7 +26,8 @@ namespace JY
         double m_mousex, m_mousey;
         Log *console;
         LayerStack m_LayerStack;
-        UILayer *ui;
+        UILayer *m_UILayer;
+        Shader *m_shader;
 
     public:
         App();

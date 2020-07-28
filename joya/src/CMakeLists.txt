@@ -8,6 +8,8 @@ add_library(joya
     ImGuiBuild.cpp
     UILayer.cpp
     Input.cpp 
+    Render/OpenGLContext.cpp 
+    Render/Shader.cpp 
 )
 
 target_include_directories(joya INTERFACE ${JOYA_SOURCE_DIR}/joya/include)
